@@ -7,3 +7,61 @@ Resources:
       InstanceType: "t2.micro"
       SecurityGroupIds:
         - !ImportValue SSHOpenSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          # stop this script on first error
+          set -e
+          # Update the OS
+          sudo yum update -y
+          # Add repo config for Jenkins
+          sudo wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+          # Import Repo Keys
+          sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+          # Install extras 
+          sudo amazon-linux-extras install epel -y
+          # Rerun the update
+          sudo yum update -y
+          # Upgrade the OS to install Repo changes
+          sudo yum upgrade -y
+          # Install Jenkins + Java
+          sudo yum install jenkins java-1.8.0-openjdk-devel -y
+          # Reload Daemon Service
+          sudo systemctl daemon-reload
+          # Start Jenkins Service
+          sudo systemctl start jenkins
+          # Check Service Status
+          sudo systemctl status jenkins
+    Metadata: 
+      AWS::CloudFormation::Init: 
+        config:
+          commands:
+            a: 
+              # Update the OS
+              command: sudo yum update -y
+            b:
+              # Add repo config for Jenkins
+              command: sudo wget -O /etc/yum.repos.d/jenkins.repo  https://pkg.jenkins.io/redhat-stable/jenkins.repo
+            c:
+              # Import Repo Keys
+              command: sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+            d:
+              # Install extras 
+              command: sudo amazon-linux-extras install epel -y
+            e:
+              # Rerun the update
+              command: sudo yum update -y
+            f: 
+              # Upgrade the OS to install Repo changes
+              command: sudo yum upgrade -y
+            g:
+              # Install Jenkins + Java
+              command: sudo yum install jenkins java-1.8.0-openjdk-devel -y
+            h:
+              # Reload Daemon Service
+              command: sudo systemctl daemon-reload
+            i: 
+              # Start Jenkins Service
+              command: sudo systemctl start jenkins
+            j: 
+              # Check Service Status
+              command: sudo systemctl status jenkins
