@@ -1,0 +1,9 @@
+Resources:
+  JenkinsEC2Machine:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-0f19d220602031aed"
+      KeyName: "ec2_keypair"
+      InstanceType: "t2.micro"
+      SecurityGroupIds:
+        - !ImportValue SSHOpenSecurityGroup

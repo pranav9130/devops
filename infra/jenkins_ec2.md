@@ -17,3 +17,7 @@ Below are the relevant links used
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html#template-anatomy-outline.yaml
 
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
+
+
+### AWS CloudFormation 
+- YAML templates are deployed as a stack

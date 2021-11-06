@@ -5,10 +5,15 @@ Resources:
     Properties: 
       GroupDescription: Security Group for EC2 machines to be made available for SSH connection 
       GroupName: ExternallyConnectableEC2Machines
-      SecurityGroupEgress: 
-        - Egress
+      # SecurityGroupEgress: 
       SecurityGroupIngress: 
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
+
+Outputs:
+  SSHOpenSecurityGroup:
+    Value: !GetAtt EC2SecurityGroup.GroupId
+    Export:
+      Name: SSHOpenSecurityGroup
