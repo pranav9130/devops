@@ -1,7 +1,7 @@
 
 ### DNS Components
 
-![Alt text](images/dns.png?raw=true "DNS")
+![Alt text](../images/dns.png?raw=true "DNS")
 
 ### [Jenkins on AWS](https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/)
 
