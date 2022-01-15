@@ -61,3 +61,27 @@ All above commands can be packaged into a bash script and provided as a user dat
 
 **Point to remember**
 - If you are deleting cloudformation stack using delete-stack command, it is better to run 'wait stack-delete-complete' subsequently to wait for its completion.
+
+
+## Jenkins Agent Setup 
+_[Reference](https://www.jenkins.io/doc/book/using/using-agents/)_ 
+- Launch Ec2 machine with Java installation 
+- This new EC2 machine will be the external build agent that can be used by Jenkins controller to deploy the build work.
+- Create SSH key pairs on the build agent using following command 
+    > ssh-keygen -f ~/.ssh/jenkins_agent_key
+- Append the public key part to authorized_keys 
+    > cat ~/.ssh/jenkins_agent_key.pub >> ~/.ssh/authorized_keys 
+- Configure the Private SSH Key on Jenkins Controller 
+    - Manage Jenkins > Manage Creds > Add Creds ( Global ) 
+    - Select Kind "SSH Username with private key"
+    - Put the Username to connect 
+    - Put the private key and passphrase
+- Confgure the Build Node 
+    - Manage Jenkins > Manage Nodes > New Node 
+    - Select Permanent Agent 
+    - Set the root directory for the build agent ( This is where Jenkins writes up the intermediate data into build agent )
+    - Select launch method as "Launch agents via SSH"
+    - Put the host IP
+    - Select the SSH creds set in the eariler setp from the dropdown 
+    - Select host key verififcation strat "Known hosts file verification strat"
+- Check if the agent is up and running 

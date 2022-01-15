@@ -1,3 +1,5 @@
+aws cloudformation  delete-stack --stack-name JenkinsEC2Agent
+aws cloudformation  wait stack-delete-complete --stack-name JenkinsEC2Agent
 aws cloudformation  delete-stack --stack-name JenkinsEC2
 aws cloudformation  wait stack-delete-complete --stack-name JenkinsEC2
 aws cloudformation  delete-stack --stack-name SecurityGroups
