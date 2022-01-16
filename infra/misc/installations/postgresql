@@ -1,7 +1,0 @@
-yum search postgres
-sudo yum install -y postgresql-server
-sudo yum install -y postgresql
-sudo rpm -ql postgresql-server
-sudo postgresql-14-setup initdb
-sudo systemctl enable postgresql
-sudo systemctl start postgresql

@@ -4,7 +4,7 @@ Resources:
     Properties:
       ImageId: "ami-0f19d220602031aed"
       KeyName: "ec2_keypair"
-      InstanceType: "t2.micro"
+      InstanceType: "t2.large"
       SecurityGroupIds:
         - !ImportValue SSHOpenSecurityGroup
       UserData: !Base64 
