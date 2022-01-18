@@ -1,0 +1,48 @@
+Resources:
+  JenkinsEC2Machine:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-0f19d220602031aed"
+      KeyName: "ec2_keypair"
+      InstanceType: "t2.large"
+      IamInstanceProfile: admin_role
+      SecurityGroupIds:
+        - !ImportValue SSHOpenSecurityGroup
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource JenkinsEC2Machine '
+            - '         --region '
+            - !Ref 'AWS::Region'
+    Metadata: 
+      AWS::CloudFormation::Init: 
+        config:
+          commands:
+            a: 
+              # Update the OS
+              command: sudo yum update -y
+            b:
+              # Install extras 
+              command: sudo amazon-linux-extras install epel -y
+            c:
+              # Rerun the update
+              command: sudo yum update -y
+            d: 
+              # Upgrade the OS to install Repo changes
+              command: sudo yum upgrade -y
+            e:
+              # Install Java
+              command: sudo yum install java-1.8.0-openjdk-devel -y
+            f:
+              # Download kubectl binary
+              curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            g: 
+              # Install kubectl binary 
+              sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl

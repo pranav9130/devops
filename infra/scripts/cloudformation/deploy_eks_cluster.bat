@@ -1,0 +1,1 @@
+eksctl create cluster --name test-eks-cluster --region us-east-2 --with-oidc --spot --instance-types=m4.large --nodes-max=2 --ssh-access --ssh-public-key ec2_keypair
