@@ -85,3 +85,5 @@ _[Reference](https://www.jenkins.io/doc/book/using/using-agents/)_
     - Select the SSH creds set in the eariler setp from the dropdown 
     - Select host key verififcation strat "Known hosts file verification strat"
 - Check if the agent is up and running 
+- Configure kubectl connection 
+    > aws eks update-kubeconfig --region us-east-2 --name test-eks-cluster

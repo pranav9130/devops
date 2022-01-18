@@ -18,7 +18,11 @@
         --nodes-max=2 \\ \
         --ssh-access \\ \
         --ssh-public-key ec2_keypair
-
+2. Authorize EC2 machines with admin roles to have access admin access on EKS cluster (*Reference*)[https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html#aws-auth-users]
+    > 1. kubectl apply -f .\infra\manifests\admin-role-binding.yaml    
+    > 2. kubectl apply -f .\infra\manifests\aws-auth-configmap.yaml    
+3. Run below command on your windows machine to get kubectl cluster access
+    > aws eks update-kubeconfig --region us-east-2 --name test-eks-cluster
 ### Multi tenant EKS Cluster
 - Multi tenancy: Allow multiple users/teams to operate on same cluster with a level of isolation between them.
 - Options to achive multi tenancy

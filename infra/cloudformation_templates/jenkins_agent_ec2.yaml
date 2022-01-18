@@ -5,6 +5,7 @@ Resources:
       ImageId: "ami-0f19d220602031aed"
       KeyName: "ec2_keypair"
       InstanceType: "t2.large"
+      IamInstanceProfile: admin_role
       SecurityGroupIds:
         - !ImportValue SSHOpenSecurityGroup
       UserData: !Base64 
@@ -39,3 +40,9 @@ Resources:
             e:
               # Install Java
               command: sudo yum install java-1.8.0-openjdk-devel -y
+            f:
+              # Download kubectl binary
+              curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            g: 
+              # Install kubectl binary 
+              sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl

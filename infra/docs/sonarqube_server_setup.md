@@ -5,9 +5,9 @@
 #### *Upgrade Java version from v8 to v11*
 - Remove Older version of Java
     > yum list installed  | grep java  
-    sudo yum remove -y java-1.8.0-openjdk.x86_64
-    sudo yum remove -y java-1.8.0-openjdk-devel.x86_64
-    sudo yum remove -y java-1.8.0-openjdk-headless.x86_64
+    sudo yum remove -y java-1.8.0-openjdk.x86_64  
+    sudo yum remove -y java-1.8.0-openjdk-devel.x86_64  
+    sudo yum remove -y java-1.8.0-openjdk-headless.x86_64  
 - Install openjdk 11
     > sudo yum install amazon-linux-extras  
     sudo amazon-linux-extras install -y java-openjdk11
@@ -84,6 +84,10 @@ Change "trust" to md5
     "Add SonarQube"  
     "Enter URL & Configure Secret text   "sonarqube_integration_token""  
     "Save"  
-
-
-
+- Add SonarQube Scanner 
+    > Manage Jenkins > Global Tool Configuration > Sonarqube Scanner > Add SonarQube scanner
+- Open the Jenkins Project/Pipeline confihuration
+    > Open the "build" section and add "sonarqube scanner" step
+- Add sonarqube properties in "Analysis Properties" section 
+    > sonar.projectKey=test-project  
+    sonar.sources=src
