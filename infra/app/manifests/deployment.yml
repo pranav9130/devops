@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  selector:
+    matchLabels:
+      app: tes-app
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 775782155147.dkr.ecr.us-east-2.amazonaws.com/hello-repository
+        ports:
+        - containerPort: 80
